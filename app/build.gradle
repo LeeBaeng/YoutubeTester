@@ -1,0 +1,89 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'org.jetbrains.dokka-android'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.leebaeng.youtubetester"
+        minSdk 29
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'int', 'LOG_LEVEL', '4'
+            buildConfigField 'boolean', 'DEBUG_TIME_CHECK', 'false'
+            buildConfigField 'String', 'BUILD_TYPE', '"release"'
+        }
+
+        debug {
+            debuggable true
+            buildConfigField 'int', 'LOG_LEVEL', '0'
+            buildConfigField 'boolean', 'DEBUG_TIME_CHECK', 'true'
+            buildConfigField 'String', 'BUILD_TYPE', '"debug"'
+        }
+    }
+
+    def releaseDate = new Date()
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def name = "youtube_tester_leebaeng"
+            def buildType = variant.buildType.name
+            def versionName = variant.versionName
+            outputFileName = "${name}_${versionName}_${releaseDate.format('yyyyMMdd')}_${buildType}.apk"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    dokka {
+        outputFormat = 'html'
+        outputDirectory = "$rootDir/javadocs"
+        includeNonPublic = true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
+    // LLog (License)
+    implementation 'com.github.LeeBaeng:LLog:publish_0.01.001beta_20220221'
+    // Glide (License?)
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+}

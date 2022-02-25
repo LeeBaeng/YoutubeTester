@@ -1,0 +1,55 @@
+.DS_Store
+*.iml
+.idea/
+.transforms/
+captures/
+local.properties
+
+# Gradle files
+.gradle/
+build/
+
+# Android Studio
+/*/build/
+/*/local.properties
+/*/out
+/*/*/build
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+### Android Patch ###
+gen-external-apklibs
+output.json
+
+# lint
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+.cxx/
+
+# Log Files
+*.log
+
+# Temp Javadoc
+javadocs/
+
+# Android Studio Navigation editor temp files
+.navigation/
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Avoid ignore Gradle wrappper properties
+!gradle-wrapper.properties
+
+# gradle-wrapper ignore(duplicated)
+gradle/wrapper/
